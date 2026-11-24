@@ -1,0 +1,6 @@
+{
+  "name": "Savior",
+  "description": "A calm, offline-first Android app for mindful digital consumption with intelligent app pausing, evening grocery planning, neutral spending awareness, and a digital-literacy manifesto.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

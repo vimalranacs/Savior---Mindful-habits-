@@ -1,0 +1,726 @@
+# Build a Native Android App for Mindful Digital Consumption
+
+## 1. The Vision
+
+Build a beautiful, lightweight, privacy-first Android application that helps users reduce impulsive spending and dependency on instant-commerce and food-delivery applications.
+
+The app should help users become more intentional about when they order food, groceries and other daily necessities.
+
+The primary problem it addresses is not simply excessive screen time. It is the convenience-driven cycle of repeatedly opening apps such as:
+
+- Blinkit
+- Zepto
+- Swiggy
+- Zomato
+- Instamart
+- Amazon
+- Flipkart
+- Other applications selected by the user
+
+These applications offer genuine convenience, but frictionless ordering can also make unnecessary purchases and impulsive consumption easier.
+
+The application should introduce a thoughtful pause between an impulse and an action.
+
+**The central philosophy: Don't make the user feel guilty. Help them become conscious of their choices.**
+
+Working name: **PAUSE** (keep the name, logo and branding easily configurable).
+
+---
+
+# 2. Design Philosophy and Visual Identity
+
+The application must have an exceptionally beautiful, minimalistic and calming UI.
+
+I want something that feels like a thoughtfully designed digital well-being product, not a typical productivity dashboard or a generic AI-generated application.
+
+### Colour palette
+
+Use a calming palette built around:
+
+- Muted blue: trust, stability and calmness.
+- Soft off-white: clean and comfortable backgrounds.
+- Very light blue: subtle cards and interactive surfaces.
+- Muted slate: secondary text.
+- A restrained green: positive progress and completed actions.
+
+Avoid excessive gradients, bright neon colours, unnecessary animations, excessive shadows and colourful dashboard cards.
+
+Suggested colours:
+
+- Primary: `#426B91`
+- Deep blue: `#294968`
+- Background: `#F7F9FC`
+- Surface: `#FFFFFF`
+- Light blue: `#EAF1F8`
+- Primary text: `#253448`
+- Secondary text: `#768496`
+- Positive accent: `#6F9D87`
+
+Treat these as starting points, not rigid requirements.
+
+### UI requirements
+
+- Native Android application.
+- Prefer Kotlin and Jetpack Compose.
+- Material 3 components, customised to achieve a distinctive identity.
+- Beautiful typography with clear visual hierarchy.
+- Subtle transitions and micro-interactions.
+- Rounded corners, restrained borders and generous spacing.
+- Excellent light-mode experience.
+- Dark mode as an optional feature.
+- Responsive layouts for different Android screen sizes.
+- Accessibility support, including scalable text, sufficient contrast and screen-reader compatibility.
+
+The interface should feel calm, intelligent, trustworthy and mature.
+
+Avoid:
+- Excessive text on the home screen.
+- Unnecessary illustrations.
+- Overloaded dashboards.
+- Gamification that creates another source of addiction.
+- Fake statistics or meaningless productivity scores.
+- Aggressive notifications or guilt-based messages.
+
+---
+
+# 3. Core Feature: Intelligent App Blocking
+
+This is the most important feature.
+
+The user should be able to select exactly which installed applications they want to restrict.
+
+### App selection
+
+Build an installed-app selector that:
+
+- Displays the app icon and application name.
+- Allows individual selection and deselection.
+- Supports searching installed applications.
+- Includes suggested categories such as food delivery, quick commerce, shopping and entertainment.
+- Allows users to add any compatible installed application, not just predefined brands.
+- Remembers the user's selections.
+
+The user should have complete control over the selection.
+
+### Blocking functionality
+
+When the user attempts to open a selected application, the app should detect the attempt and display a beautiful interruption screen.
+
+The screen should look like a deliberate, carefully designed moment of reflection, rather than an error message.
+
+Suggested message:
+
+**"A little pause before you proceed."**
+
+"Remember why you chose to limit this app.
+
+Convenience is useful, but constant convenience can make unnecessary spending feel effortless.
+
+Do you actually need something right now, or is this just a habit?"
+
+Display three actions:
+
+1. **Go Back** – return to the previous application or home screen.
+2. **Give Me a Minute** – introduce a short reflection period before deciding.
+3. **Unlock Anyway** – let the user consciously bypass the restriction.
+
+Use different messages occasionally, but keep them thoughtful, non-judgmental and short.
+
+Other suggested messages:
+
+- "You don't have to turn every craving into an order."
+- "A few minutes of convenience can sometimes become a habit of unnecessary spending."
+- "Could this wait until your next grocery run?"
+- "Pause. Check whether you actually need it."
+- "You are allowed to choose convenience. Just make sure it is your choice."
+
+### Unlock system
+
+Never make the application feel coercive.
+
+The user must always retain control of their device.
+
+Provide:
+- Temporary unlock for 5, 15 or 30 minutes.
+- Unlock until the end of the day.
+- A configurable cooldown before unlocking.
+- Optional reason for unlocking.
+- A manual override accessible at all times.
+- Individual application unlock controls.
+- Configurable blocking schedules.
+
+Do not make the user enter complicated passwords every time. Reflection should be the focus, not frustration.
+
+### Blocking schedules
+
+Allow users to configure:
+
+- Always block.
+- Block during selected hours.
+- Block on selected days.
+- Block during work or study hours.
+- Block after a particular time in the evening.
+- Temporarily pause all restrictions.
+
+Show the current blocking status clearly.
+
+---
+
+# 4. Android Implementation: Reliability and Technical Constraints
+
+The blocking feature must be genuinely functional, not a UI demonstration.
+
+Investigate the current Android APIs and implement the most reliable supported mechanism.
+
+Potential implementation approaches include:
+
+- Android AccessibilityService for detecting foreground application/window changes.
+- A suitable accessibility overlay for displaying the interruption screen.
+- UsageStatsManager as a supplementary mechanism where appropriate.
+
+Important technical considerations:
+
+1. Explain exactly which Android permissions are necessary.
+2. Request permissions only when the user activates the relevant feature.
+3. Explain why Accessibility access is required before asking the user to enable it.
+4. Never collect screen contents, passwords, messages, keystrokes or unrelated accessibility data.
+5. Only inspect the minimum information needed to identify the foreground package.
+6. Restrict monitoring to the applications explicitly selected by the user.
+7. Handle Android background execution restrictions correctly.
+8. Handle device restarts and accessibility-service interruptions gracefully.
+9. Avoid continuous unnecessary background polling.
+10. Provide clear diagnostics if blocking stops working.
+
+Do not use root access, hidden APIs, deceptive permission requests or unnecessary device administrator privileges.
+
+Do not claim that the application can make another application impossible to open. Android permissions can be revoked, services can be stopped and restrictions can be bypassed. Explain these limitations honestly.
+
+Before implementation, check the latest Google Play policies concerning AccessibilityService usage and app monitoring. If Play Store distribution is intended, implement the required prominent disclosure, consent and declarations. Do not assume that any particular blocking technique will automatically qualify for Play Store distribution.
+
+The application must never secretly monitor the user's device.
+
+---
+
+# 5. Evening Routine: Plan Before You Order
+
+Build an evening reminder system that encourages users to plan their groceries and daily necessities before they feel the urge to order something instantly.
+
+The user should be able to configure a preferred reminder time, with a sensible default of around 7:30 PM.
+
+Suggested notification:
+
+**"A small reminder for tomorrow's you."**
+
+"Take a moment to check your kitchen, plan tomorrow's essentials and prepare your grocery list. A little planning can save unnecessary orders later."
+
+### Evening planning screen
+
+When the user opens the reminder, show:
+
+- Today's saved grocery list.
+- Items they regularly purchase.
+- Items they have marked as running low.
+- Suggested essentials.
+- An option to plan tomorrow's meals.
+- An option to review upcoming household needs.
+
+Allow the user to prepare a shopping list for the next day or week.
+
+Make this a simple and enjoyable habit.
+
+### Smart suggestions
+
+Provide useful suggestions based on:
+
+1. The user's saved items.
+2. Frequently repeated purchases.
+3. Manually configured replenishment intervals.
+4. User-entered household requirements.
+5. Optional seasonal or contextual suggestions.
+
+Examples:
+
+- Milk
+- Eggs
+- Bread
+- Vegetables
+- Fruits
+- Cooking oil
+- Rice
+- Atta
+- Household cleaning products
+- Personal care essentials
+
+Do not pretend to know what is running low. Ask the user or use explicitly configured replenishment intervals.
+
+Do not automatically purchase anything.
+
+Do not create a complicated recommendation engine. Start with simple, explainable rules that work entirely offline.
+
+### Grocery management
+
+Build a lightweight grocery manager with:
+
+- Add, edit and delete items.
+- Quantity and unit selection.
+- Category selection.
+- Approximate price.
+- Purchase frequency.
+- Last purchased date.
+- Optional replenishment reminders.
+- Checked/unchecked status.
+- Saved favourites.
+- Multiple shopping lists.
+
+Allow users to mark things as already available at home.
+
+---
+
+# 6. Financial Awareness
+
+An optional but important feature should help users understand how much they spend on impulse orders.
+
+Build a simple spending-awareness section.
+
+Users can manually enter:
+- Order amount.
+- Date.
+- Category.
+- Optional application name.
+- Whether the purchase was necessary or impulsive.
+
+Display:
+
+- Monthly spending.
+- Weekly spending.
+- Impulsive spending.
+- Frequently purchased categories.
+- Estimated spending avoided through planned purchases.
+- Monthly spending trends.
+
+Do not automatically collect financial transactions or scrape banking applications.
+
+Never claim that blocking an app has saved a specific amount unless there is reliable user-entered data supporting that calculation.
+
+Use neutral language.
+
+For example:
+
+"Last month, you recorded ₹2,400 in quick-commerce and food-delivery spending."
+
+"Planning your groceries beforehand may help you reduce unnecessary orders."
+
+Do not shame users for spending money.
+
+---
+
+# 7. The Manifesto: Understand What Happens Behind Convenience
+
+Create a dedicated section called:
+
+**BEYOND CONVENIENCE**
+
+This section should communicate the philosophy behind the application and educate users about digital consumption, privacy and behavioural design.
+
+It should be beautifully designed as a collection of short editorial articles, not a large block of text.
+
+Use a clean reading experience with:
+- Strong headings.
+- Short paragraphs.
+- Highlighted key ideas.
+- Simple illustrations where genuinely useful.
+- Expandable explanations.
+- References and source links.
+
+### A. The Economics of Convenience
+
+Explain how frictionless ordering, saved payment information, personalised recommendations, rapid delivery and repeated exposure can encourage frequent purchases.
+
+Explain the difference between:
+- Genuine necessity.
+- Planned consumption.
+- Convenience-driven consumption.
+- Impulsive consumption.
+
+Do not claim that all convenience applications are inherently harmful.
+
+The message should be that convenience is useful, but users should remain conscious of when and why they use it.
+
+### B. Your Digital Footprint
+
+Use the following observations from the supplied transcript as research topics for the educational section.
+
+The transcript makes claims about the following:
+
+**1. Installed application information**
+
+It alleges that an application checks for the presence of approximately 21 other applications.
+
+Explain that installed-app information can potentially reveal interests, lifestyle patterns and other behavioural signals, depending on the implementation and permissions involved.
+
+**2. Accessibility and display settings**
+
+The transcript discusses font size, zoom settings and screen-reader usage.
+
+Explain that device configuration and accessibility preferences can reveal information about how someone uses their phone and may sometimes contribute to demographic inferences.
+
+Make it clear that these signals do not reliably establish a person's age.
+
+**3. Account and authentication files**
+
+The transcript alleges that a particular backup file contains login information.
+
+Explain the security implications of session tokens, authentication credentials, insecure storage and device backups.
+
+Do not reproduce unverified claims about any company's actual implementation.
+
+**4. Wi-Fi information and location**
+
+The transcript discusses storing Wi-Fi network names alongside location information.
+
+Explain how different data points can become more revealing when combined.
+
+For instance, a network identifier and location history could potentially contribute to household or location inferences.
+
+**5. Battery level and behavioural signals**
+
+The transcript discusses recording battery levels and refers to research suggesting that low battery conditions may influence consumer decisions.
+
+Explain the broader concept of behavioural signals and how contextual information may be used in personalisation or experimentation.
+
+Do not assert that a specific company uses battery level to manipulate its prices without verifiable evidence.
+
+### C. Important Research and Editorial Standards
+
+The supplied material is a transcript of commentary, not independently verified technical evidence.
+
+This application must distinguish between:
+
+- Independently verified facts.
+- Claims made by third parties.
+- Plausible technical risks.
+- Interpretations or speculation.
+
+Never present allegations about Blinkit, Zepto, Swiggy, Zomato or another company as proven facts without reliable supporting evidence.
+
+Before including company-specific allegations:
+- Find the original technical source or relevant primary documentation.
+- Check the accuracy and context of the evidence.
+- Record the original publication date.
+- Provide links to sources.
+- Explain what the evidence does and does not establish.
+- Correct the content if credible contradictory evidence emerges.
+
+Where verification is unavailable, explicitly label the material as an unverified claim or general privacy risk.
+
+Do not invent research, citations, statistics or quotations.
+
+The objective is digital literacy, not defamation or fearmongering.
+
+### D. A Short Manifesto
+
+Include this editorial statement:
+
+"We built technology to make life easier. Somewhere along the way, ease began to replace intention.
+
+Every unnecessary order may seem insignificant on its own. Every impulsive purchase may feel harmless in isolation. But repeated decisions eventually shape our habits, our spending and the way we interact with the world.
+
+This application is not against convenience, technology or the companies that provide these services.
+
+It is about remembering that convenience should remain a choice, not become an automatic response.
+
+Buy what you need. Order when it makes sense. Use technology when it serves you.
+
+But leave room for intention."
+
+---
+
+# 8. Habit Awareness and Personal Progress
+
+Create a small, encouraging section that helps users understand their progress.
+
+Possible metrics:
+
+- Number of times they chose to return instead of ordering.
+- Number of planned shopping sessions.
+- Number of days they followed their chosen restrictions.
+- Recorded impulsive orders.
+- Estimated spending avoided, based only on reliable user inputs.
+
+Use weekly and monthly summaries.
+
+Examples:
+
+"You paused 12 times this week before opening a restricted application."
+
+"You planned your groceries three evenings this week."
+
+"Your choices are becoming more intentional."
+
+Do not turn this into a competitive leaderboard.
+
+Do not encourage obsessive tracking.
+
+Avoid streaks that make users feel like failures when they miss a day.
+
+---
+
+# 9. Notifications and Reminder Intelligence
+
+Notifications should be configurable, limited and genuinely useful.
+
+Required notification categories:
+
+1. Evening grocery planning.
+2. Running-low item reminders.
+3. Optional weekly spending review.
+4. Optional weekly reflection.
+
+Requirements:
+
+- User-controlled schedules.
+- Quiet hours.
+- Notification frequency limits.
+- No unnecessary repeated notifications.
+- No notifications during configured sleep hours.
+- Proper Android notification channels.
+- Handle Android 13+ notification permission.
+- Respect current Android restrictions concerning exact alarms and background scheduling.
+
+Prefer WorkManager for ordinary scheduled work. Use exact alarms only when justified and permitted.
+
+All reminder content should be editable or configurable.
+
+---
+
+# 10. Privacy and Security: A Core Product Requirement
+
+Privacy should be a fundamental architectural principle, not a marketing slogan.
+
+The application should operate locally without requiring an account.
+
+### Data handling
+
+- No mandatory login.
+- No cloud backend in the initial version.
+- No advertisements.
+- No third-party analytics SDKs.
+- No unnecessary internet permission.
+- No transmission of installed-app lists.
+- No collection of browsing history.
+- No collection of screen contents.
+- No collection of credentials from other applications.
+- No selling or sharing of user data.
+
+Store the user's settings, selected applications, grocery lists and optional spending records locally.
+
+### Secure implementation
+
+- Use Android Keystore-backed encryption for sensitive locally stored information where appropriate.
+- Use DataStore for simple settings.
+- Use Room for structured local data.
+- Exclude sensitive records from Android cloud backup by default unless the user explicitly chooses otherwise.
+- Avoid logging sensitive information.
+- Validate all input.
+- Use safe database queries.
+- Avoid unnecessary dependencies.
+- Keep dependencies current and monitor security vulnerabilities.
+- Handle service failures and permission revocation safely.
+
+Provide:
+- Export my data.
+- Delete all my data.
+- Reset application settings.
+- View required permissions.
+- View the privacy policy.
+
+Do not claim that local storage automatically means perfect security.
+
+---
+
+# 11. Legal, Disclaimer and Terms of Use
+
+Create a dedicated legal section with:
+
+1. Privacy Policy.
+2. Terms and Conditions.
+3. Disclaimer.
+4. Accessibility and permission disclosure.
+5. Third-party trademark disclaimer.
+6. Data deletion and user rights information.
+
+Use clear and understandable language.
+
+### Suggested disclaimer
+
+"PAUSE is an independent digital well-being and personal consumption management application. It is designed to help users voluntarily manage access to selected applications and make more informed decisions about their purchases.
+
+PAUSE is not affiliated with, endorsed by, sponsored by or officially connected with Blinkit, Zepto, Swiggy, Zomato or any other third-party application.
+
+All third-party names and trademarks belong to their respective owners and are used only where necessary to identify applications or explain their functionality.
+
+PAUSE does not access, modify, interfere with or control the internal systems, servers, transactions, services or operations of third-party applications.
+
+The application does not guarantee that users will save money, reduce spending, improve their health or change their behaviour. These outcomes depend on individual choices.
+
+Application-blocking functionality depends on Android operating system capabilities and permissions voluntarily granted by the user. Restrictions may be affected by operating system updates, permission changes, device settings or other technical limitations.
+
+Educational content about digital privacy and consumer behaviour is provided for general informational purposes. Company-specific statements must be supported by reliable evidence and clearly distinguish established facts from reported claims and interpretations."
+
+### Legal safeguards
+
+Do not assume that including a disclaimer prevents someone from filing a legal complaint or removes all legal liability.
+
+Do not publish unverified accusations, misleading statistics or unsupported allegations against named companies.
+
+Use only original visual assets, or assets with appropriate licences.
+
+Do not use competitor logos or branding in a way that could suggest affiliation.
+
+Draft the documents as a practical starting point for review by a qualified lawyer familiar with the jurisdictions where the application will be distributed. Do not claim that they are legally certified or guarantee immunity from litigation.
+
+---
+
+# 12. Application Architecture and Engineering Standards
+
+Build this as a maintainable native Android project.
+
+Preferred technology:
+
+- Kotlin.
+- Jetpack Compose.
+- Material 3.
+- Room.
+- DataStore.
+- WorkManager.
+- Android Keystore.
+- Android AccessibilityService, if appropriate and policy-compliant.
+
+### Architecture
+
+Use a clean and modular architecture.
+
+Suggested structure:
+
+- `presentation/` – Compose screens and UI components.
+- `domain/` – business logic and use cases.
+- `data/` – repositories, Room and DataStore.
+- `blocking/` – app detection, blocking rules and interruption interface.
+- `notifications/` – reminders and notification management.
+- `groceries/` – grocery lists and suggestions.
+- `spending/` – optional expenditure tracking.
+- `privacy/` – privacy controls and data management.
+- `legal/` – policies and disclosures.
+
+Follow MVVM or an equally sensible architecture.
+
+Do not overengineer the application.
+
+### Performance
+
+The application must:
+
+- Be lightweight.
+- Start quickly.
+- Have minimal background battery consumption.
+- Avoid unnecessary network requests.
+- Avoid unnecessary animations.
+- Use efficient database operations.
+- Avoid excessive recomposition in Compose.
+- Handle service lifecycle correctly.
+- Work without an internet connection for core features.
+
+Do not introduce a complicated backend, microservices, Firebase or AI APIs unless a genuinely necessary feature requires them.
+
+The initial version must be entirely usable offline.
+
+---
+
+# 13. Testing and Quality Assurance
+
+Do not just create screens that look functional.
+
+Implement and test the actual application behaviour.
+
+Test:
+
+- Selecting applications.
+- Blocking selected applications.
+- Allowing unselected applications.
+- Temporary unlocking.
+- Unlocking until the end of the day.
+- Scheduled blocking.
+- Device restart.
+- Accessibility permission revocation.
+- Service interruption.
+- Notification scheduling.
+- Quiet hours.
+- Grocery list creation and editing.
+- Replenishment reminders.
+- Spending calculations.
+- Exporting and deleting local data.
+- Dark mode.
+- Large text and accessibility support.
+- Different Android versions.
+
+Include unit tests for core business logic and practical instrumentation tests for important user flows.
+
+Test performance, crashes and battery use on a physical Android device where possible.
+
+Never claim a feature has been tested on a device if it has only been tested in an emulator.
+
+---
+
+# 14. Final Deliverables
+
+Do not stop after generating a design or writing an implementation plan.
+
+Actually build the application.
+
+Deliver:
+
+1. Complete Android Studio project.
+2. Functional Jetpack Compose UI.
+3. Working app-selection and blocking functionality.
+4. Grocery planning and reminders.
+5. Optional spending tracker.
+6. Manifesto and digital privacy education section.
+7. Privacy Policy and Terms drafts.
+8. Permission explanation and onboarding screens.
+9. Unit and integration tests.
+10. A release-ready APK.
+11. A README explaining how to build, install and use the application.
+
+Also provide:
+
+- Current implementation status.
+- Android versions supported.
+- Required permissions and why they are needed.
+- Known limitations.
+- Any features that remain incomplete.
+- Instructions for generating a signed release build.
+
+### Development approach
+
+First inspect the existing project and environment.
+
+If a project already exists, preserve its working functionality and follow its existing conventions where sensible.
+
+Then:
+
+1. Establish the architecture and essential design system.
+2. Build the onboarding and permission flow.
+3. Implement app selection and actual blocking.
+4. Build grocery planning and reminder features.
+5. Implement spending awareness and the manifesto.
+6. Add privacy and legal sections.
+7. Test and optimise the complete application.
+8. Generate the final APK.
+
+Prioritise the blocking mechanism and core user experience over secondary features.
+
+Do not introduce unnecessary dependencies or features merely to make the project appear more sophisticated.
+
+When a feature cannot be implemented reliably within Android's restrictions, explain the limitation and implement the best supported alternative.
+
+**The final standard:** This should feel like a polished, trustworthy Android application that somebody would genuinely want to keep installed for years. It should be beautiful without being distracting, useful without being intrusive, and protective of the user's autonomy and privacy.

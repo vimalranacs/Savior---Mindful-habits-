@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Savior</string>
+    <string name="accessibility_service_label">Savior Mindful Pause</string>
+    <string name="accessibility_service_description">Detects only when an app you explicitly selected opens so Savior can show a calm pause screen before you proceed. Savior never reads screen content, messages, passwords, or keystrokes, and never transmits data off your device.</string>
+    <string name="channel_evening_planning_name">Evening Grocery Planning</string>
+    <string name="channel_evening_planning_desc">Gentle daily reminder to plan tomorrow\'s groceries and household essentials.</string>
+    <string name="channel_running_low_name">Running-Low Essentials</string>
+    <string name="channel_running_low_desc">Reminders based on your configured replenishment intervals and marked items.</string>
+    <string name="channel_weekly_spending_name">Weekly Spending Awareness</string>
+    <string name="channel_weekly_spending_desc">Optional weekly summary of manually recorded convenience spending.</string>
+    <string name="channel_weekly_reflection_name">Weekly Mindful Reflection</string>
+    <string name="channel_weekly_reflection_desc">Optional weekly note summarizing your mindful pauses and planned sessions.</string>
+</resources>
